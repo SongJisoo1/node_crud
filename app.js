@@ -1,6 +1,7 @@
 const express = require('express');
+require('dotenv').config();
 
-const PORT = 3000;
+const PORT = process.env.PORT
 
 const postRouter = require('./routes/post.js');
 const commentRouter = require('./routes/comment.js');
