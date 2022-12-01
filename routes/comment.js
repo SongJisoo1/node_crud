@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Comments = require('../schemas/comment');
 
 const router = express.Router();
+const { ObjectId }  = mongoose.Types;
 
 //댓글 생성 
 router.post('/:_postId', async (req, res, next) => {

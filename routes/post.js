@@ -105,7 +105,7 @@ router.delete('/:_postId', async (req, res) => {
         const { _postId } = req.params;
         const { password } = req.body;
 
-        const existPost = await Posts.findOne({'_id': ObjectId(_postId)});
+        const existPost = await Posts.findOne({'_id': _postId});
 
         if(!existPost) {
             return res.status(404).json({'message': '게시글 조회에 실패하였습니다.'});
