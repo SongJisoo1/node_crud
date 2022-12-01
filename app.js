@@ -1,5 +1,4 @@
 const express = require('express');
-const httpError = require('http-error');
 require('dotenv').config();
 
 const PORT = process.env.PORT
