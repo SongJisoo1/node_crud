@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 
 const Comments = require('../schemas/comment');
 
-const { ObjectId } = mongoose.Types;
-
 const router = express.Router();
 
 //댓글 생성 
@@ -59,7 +57,7 @@ router.put('/:_commentId', async (req, res) => {
         const { _commentId } = req.params;
         const { password, content } = req.body;
 
-        const existComments = await Comments.findOne({'_id': ObjectId(_commentId)});
+        const existComments = await Comments.findOne({'_id': _commentId});
 
         if(!existComments) {
             return res.status(404).json({'message': '댓글 조회에 실패하였습니다.'});
@@ -92,7 +90,7 @@ router.delete('/:_commentId', async (req, res) => {
             const { password } = req.body;
             const { _commentId } = req.params;
 
-            const existComments = await Comments.findOne({'_id': ObjectId(_commentId)});
+            const existComments = await Comments.findOne({'_id': _commentId});
 
             if(!existComments) {
                 return res.status(404).json({'message': '댓글 조회에 실패하였습니다.'});

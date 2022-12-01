@@ -5,8 +5,6 @@ const router = express.Router();
 
 const Posts = require('../schemas/post.js');
 const Comments = require('../schemas/comment.js');
-const { ObjectId } = mongoose.Types;
-
 
 // 게시글 작성
 router.post('/', async (req, res) => {
@@ -42,8 +40,8 @@ router.get('/:_postId', async (req, res) => {
     try {
         const { _postId } = req.params;
 
-        const detailPost = await Posts.find({'_id': ObjectId(_postId)}, {'password': 0, 'comments': 0 });
-
+        const detailPost = await Posts.find({'_id': _postId}, {'password': 0, 'comments': 0 });
+        
         if(!detailPost) {
             return res.status(400).json({'message': '데이터 형식이 올바르지 않습니다..'});
         }
@@ -76,7 +74,7 @@ router.put('/:_postId', async (req, res) => {
         const editedPost = req.body;
         const { password, title, content } = req.body;
 
-        const existPost = await Posts.findOne({'_id': ObjectId(_postId)});
+        const existPost = await Posts.findOne({'_id': _postId});
 
         if(!existPost) {
             return res.status(404).json({ 'message': '게시글 조회에 실패하였습니다.'});
