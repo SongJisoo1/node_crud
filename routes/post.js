@@ -41,7 +41,7 @@ router.get('/:_postId', async (req, res) => {
         const { _postId } = req.params;
 
         const detailPost = await Posts.find({'_id': _postId}, {'password': 0, 'comments': 0 });
-        
+
         if(!detailPost) {
             return res.status(400).json({'message': '데이터 형식이 올바르지 않습니다..'});
         }
@@ -80,7 +80,7 @@ router.put('/:_postId', async (req, res) => {
             return res.status(404).json({ 'message': '게시글 조회에 실패하였습니다.'});
         }
 
-        const isValidBody = editedPost.filter( v => !v.trim()).length;
+        const isValidBody = Object.values(editedPost).filter( v => !v.trim()).length;
 
         if(Object.keys(editedPost).length !== 3 || isValidBody || password !== existPost.password) {
             return res.status(400).json({ 'message': '데이터 형식이 올바르지 않습니다.' });
@@ -91,7 +91,7 @@ router.put('/:_postId', async (req, res) => {
         return res.status(201).json({'message': '게시글을 수정하였습니다.'});
     
     } catch (err) {
-
+    
         return res.status(400).json({'message': '데이터 형식이 올바르지 않습니다.'});
 
     }    
